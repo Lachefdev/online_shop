@@ -67,6 +67,27 @@ const components = {
 
     },
 
+    total(parent) {
+        //console.log(warenkorb);
+        let cartSum = 0, totalItems = 0;
+        for (let key in warenkorb) {
+            const product = products.find(product => product.id == key);
+            cartSum += product.price * warenkorb[key];
+            totalItems += warenkorb[key];
+        }
+
+        //Position
+        let elTotalItems = document.createElement('div');
+        elTotalItems.innerHTML = `Total Items: ${totalItems}`;
+        parent.append(elTotalItems);
+
+        let elCartSum = document.createElement('p');
+        elCartSum.className = 'cartSum';
+        elCartSum.innerHTML = 'In total' + '<br>' + `${cartSum} Euro`;
+        parent.append(elCartSum);
+
+    }
+
 
 
 }
