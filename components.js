@@ -34,7 +34,7 @@ const components = {
 
     },
 
-    bagPiece(id, amount, parent){
+    bagPiece(id, amount, parent) {
 
         const product = products.find(product => product.id == id);
 
@@ -50,6 +50,20 @@ const components = {
         const elPickedBez = document.createElement('h2');
         elPickedBez.innerHTML = product.name;
         elPickedCharm.append(elPickedBez);
+
+        const elUnit = document.createElement('div');
+        elUnit.innerHTML = amount;
+        elPickedCharm.append(elUnit);
+
+        const elEinzelPreis = document.createElement('div');
+        elEinzelPreis.className = 'einzelPreis';
+        elEinzelPreis.innerHTML = `Price per Unit: ${product.price} Euro`;
+        elPickedCharm.append(elEinzelPreis);
+
+        const elSubtotal = document.createElement('div');
+        elSubtotal.className = 'total';
+        elSubtotal.innerHTML = product.price * amount;
+        elPickedCharm.append(elSubtotal);
 
     },
 
