@@ -52,18 +52,24 @@ const components = {
         elPickedCharm.append(elPickedBez);
 
         const elUnit = document.createElement('div');
-        elUnit.innerHTML = amount;
+        elUnit.innerHTML = `Units: ${amount}`;
         elPickedCharm.append(elUnit);
 
         const elEinzelPreis = document.createElement('div');
         elEinzelPreis.className = 'einzelPreis';
-        elEinzelPreis.innerHTML = `Price per Unit: ${product.price} Euro`;
+        elEinzelPreis.innerHTML = `Price per unit: ${product.price} Euro`;
         elPickedCharm.append(elEinzelPreis);
 
         const elSubtotal = document.createElement('div');
-        elSubtotal.className = 'total';
-        elSubtotal.innerHTML = product.price * amount;
+        elSubtotal.className = 'subtotal';
+        elSubtotal.innerHTML = `${product.price * amount} Euro`;
         elPickedCharm.append(elSubtotal);
+
+        const elKillBtn = document.createElement('button');
+        elKillBtn.className = 'killBtn';
+        elKillBtn.innerHTML = 'Delete';
+        elPickedCharm.append(elKillBtn);
+        elKillBtn.addEventListener('click', () => killMe ());
 
     },
 
@@ -76,18 +82,17 @@ const components = {
             totalItems += warenkorb[key];
         }
 
-        //Position
         let elTotalItems = document.createElement('div');
+        elTotalItems.className = 'total';
         elTotalItems.innerHTML = `Total Items: ${totalItems}`;
         parent.append(elTotalItems);
 
         let elCartSum = document.createElement('p');
         elCartSum.className = 'cartSum';
-        elCartSum.innerHTML = 'In total' + '<br>' + `${cartSum} Euro`;
+        elCartSum.innerHTML = 'IN TOTAL' + '<br>' + `${cartSum} Euro`;
         parent.append(elCartSum);
 
-    }
-
+    },
 
 
 }
