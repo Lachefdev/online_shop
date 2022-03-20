@@ -69,7 +69,14 @@ const components = {
         elKillBtn.className = 'killBtn';
         elKillBtn.innerHTML = 'Delete';
         elPickedCharm.append(elKillBtn);
-        elKillBtn.addEventListener('click', () => killMe ());
+        elKillBtn.addEventListener('click', () => killMe(product));
+
+        //Total & Anzeige nach dem Laden anpassen - clear
+        const killMe = () => {
+            elPickedCharm.remove();
+            warenkorb[product.id] = 0;
+            localStorage.setItem('warenkorb', JSON.stringify(warenkorb));      
+        };
 
     },
 
@@ -96,3 +103,4 @@ const components = {
 
 
 }
+
