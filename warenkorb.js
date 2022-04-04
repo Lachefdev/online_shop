@@ -1,5 +1,7 @@
 'use strict';
 
+const parent = document.querySelector('#basket');
+
 const loadCart = () => {
 
     let loadedData = localStorage.getItem('warenkorb');
@@ -7,14 +9,25 @@ const loadCart = () => {
 }
 
 const renderCart = () => {
-    loadCart();
-    const parent = document.querySelector('#basket');
+
     for (let key in warenkorb) {
         components.bagPiece(key, warenkorb[key], parent);
     }
     components.total(parent);
 }
 
+const killMe = key => {
+    warenkorb[key] = 0;
+    delete warenkorb[key];
+    localStorage.setItem('warenkorb', JSON.stringify(warenkorb));
+    updateCart()
+}
+
+const updateCart = () => {
+    loadCart();
+    parent.innerHTML = " ";
+    renderCart();   
+}
 
 
 const init = () => {
@@ -23,4 +36,3 @@ const init = () => {
 }
 
 init();
-
