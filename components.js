@@ -1,6 +1,7 @@
 'use strict';
 
 const components = {
+
     piece(data, parent) {
 
         const elCharm = document.createElement('div');
@@ -38,14 +39,18 @@ const components = {
 
         const product = products.find(product => product.id == id);
 
-        const elPickedCharm = document.createElement('div');
-        elPickedCharm.className = 'cartPiece';
-        parent.append(elPickedCharm);
+        const elContainer = document.createElement('div');
+        elContainer.className = 'pickedContainer';
+        parent.append(elContainer);
 
         const elPickedIllu = document.createElement('img');
         elPickedIllu.src = `img/${product.img}`;
         elPickedIllu.className = 'pickedIllu';
-        elPickedCharm.append(elPickedIllu);
+        elContainer.append(elPickedIllu);
+
+        const elPickedCharm = document.createElement('div');
+        elPickedCharm.className = 'cartPiece';
+        elContainer.append(elPickedCharm);
 
         const elPickedBez = document.createElement('h2');
         elPickedBez.innerHTML = product.name;
@@ -71,6 +76,13 @@ const components = {
         elPickedCharm.append(elKillBtn);
         elKillBtn.addEventListener('click', () => killMe(product.id));
 
+        const elChangeInput = document.createElement('input');
+        elChangeInput.className = 'changeInput';
+        elChangeInput.type = 'number';
+        elPickedCharm.append(elChangeInput);
+        elChangeInput.value = amount;
+        elChangeInput.addEventListener('change', () => changeUnit(product.id, elChangeInput.value));
+
     },
 
     total(parent) {
@@ -79,18 +91,22 @@ const components = {
         for (let key in warenkorb) {
             const product = products.find(product => product.id == key);
             cartSum += product.price * warenkorb[key];
-            totalItems += warenkorb[key];
+            totalItems += Number(warenkorb[key]);
         }
 
-        let elTotalItems = document.createElement('div');
+        const elTotal = document.createElement('div');
+        elTotal.className = 'totalContainer';
+        parent.append(elTotal);
+
+        let elTotalItems = document.createElement('p');
         elTotalItems.className = 'total';
         elTotalItems.innerHTML = `Total Items: ${totalItems}`;
-        parent.append(elTotalItems);
+        elTotal.append(elTotalItems);
 
         let elCartSum = document.createElement('p');
         elCartSum.className = 'cartSum';
         elCartSum.innerHTML = 'IN TOTAL' + '<br>' + `${cartSum} Euro`;
-        parent.append(elCartSum);
+        elTotal.append(elCartSum);
 
     },
 
