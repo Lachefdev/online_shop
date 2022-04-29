@@ -23,6 +23,12 @@ const killMe = key => {
     updateCart()
 }
 
+const changeUnit = (key,value) => {
+    warenkorb[key] = value;
+    localStorage.setItem('warenkorb', JSON.stringify(warenkorb));
+    updateCart();
+}
+
 const updateCart = () => {
     loadCart();
     parent.innerHTML = " ";
